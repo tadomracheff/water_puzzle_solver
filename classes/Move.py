@@ -11,3 +11,6 @@ class Move:
 
     def __eq__(self, other):
         return self.to == other.to and self.where == other.where
+
+    def is_reverse(self, other):
+        return self.to == other.where and self.where == other.to

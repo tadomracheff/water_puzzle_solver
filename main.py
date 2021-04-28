@@ -26,36 +26,25 @@ def state_equal(s1, s2):
     return res
 
 
-def search_loop(solution):
-    for i in range(len(solution)-5):
-        if i >= 2:
-            if solution[i].to == solution[i - 1].where and solution[i - 1].to == solution[i].where:
+def search_loop(solution, capacity):
+    len_solution = len(solution)
+
+    a = solution[len_solution-1]
+    k = 1
+    a0 = a
+
+    for i in range(len_solution + 1):
+        if i + 1 == k:
+            a0 = a
+            k = k + k
+        else:
+            if a.__eq__(a0):
+                if len_solution - k - i > capacity - 1:  # ёмкость минус 1 (нужно три хода для 1|2|2|2 -> 2|_|_|_)
+                    return True
+            if a.is_reverse(a0):
                 return True
-        if i >= 4:
-            if solution[i].to == solution[i - 3].where and solution[i - 3].to == solution[i].where:
-                return True
-        if i >= 3:
-            if solution[i].__eq__(solution[i - 2]) and \
-                    solution[i + 1].__eq__(solution[i - 1]):
-                return True
-        if i >= 4:
-            if solution[i].__eq__(solution[i - 3]) and \
-                    solution[i + 1].__eq__(solution[i - 2]) and \
-                    solution[i + 2].__eq__(solution[i - 1]):
-                return True
-        if i >= 5:
-            if solution[i].__eq__(solution[i - 4]) and \
-                    solution[i + 1].__eq__(solution[i - 3]) and \
-                    solution[i + 2].__eq__(solution[i - 2]) and \
-                    solution[i + 3].__eq__(solution[i - 1]):
-                return True
-        if i >= 6:
-            if solution[i].__eq__(solution[i - 5]) and \
-                    solution[i + 1].__eq__(solution[i - 4]) and \
-                    solution[i + 2].__eq__(solution[i - 3]) and \
-                    solution[i + 3].__eq__(solution[i - 2]) and \
-                    solution[i + 4].__eq__(solution[i - 1]):
-                return True
+        if i != len_solution:
+            a = solution[len_solution-1-i]
 
     return False
 
@@ -69,7 +58,7 @@ def calc_current_state(node):
 
     solution.reverse()
 
-    if search_loop(solution):
+    if search_loop(solution, state[0].capacity):
         return None
 
     states = list()
@@ -213,9 +202,9 @@ def game_init(flasks_init, empty_count, capacity):
 if __name__ == '__main__':
     # flasks = game_init([[1, 2], [2, 1]], 1, 2)
     # flasks = game_init([[1, 2, 3], [2, 1, 3], [2, 1, 3]], 2, 3)
-    # flasks = game_init([[1, 1, 1, 2], [3, 4, 1, 3], [3, 2, 2, 3], [2, 4, 4, 4]], 2, 4)
+    flasks = game_init([[1, 1, 1, 2], [3, 4, 1, 3], [3, 2, 2, 3], [2, 4, 4, 4]], 2, 4)
     # flasks = game_init([[4,12,2,3],[1,9,5,7],[5,11,4,9],[3,11,1,10],[5,8,10,9],[5,12,9,3],[2,12,7,6],[1,6,7,11],[8,8,7,4],[6,10,11,2],[12,4,3,2],[1,10,6,8]], 2, 4)
-    flasks = game_init([[1,2,2,3],[4,2,5,6],[7,8,8,8],[3,7,9,4],[10,1,6,5],[3,9,11,1],[11,12,8,1],[4,12,9,10],[11,4,3,6],[5,2,5,12],[7,7,6,10],[11,12,10,9]], 2, 4)
+    # flasks = game_init([[1,2,2,3],[4,2,5,6],[7,8,8,8],[3,7,9,4],[10,1,6,5],[3,9,11,1],[11,12,8,1],[4,12,9,10],[11,4,3,6],[5,2,5,12],[7,7,6,10],[11,12,10,9]], 2, 4)
     # flasks = game_init([[1, 2, 3, 4], [2, 1, 3, 4], [2, 1, 3, 4], [4, 2, 1, 3]], 2, 4)
     # flasks = game_init([[1, 1, 1, 2], [1, 3, 2, 4], [4, 2, 4, 3], [3, 4, 3, 5], [2, 5, 5, 5]], 2, 4)
 
