@@ -82,14 +82,6 @@ def do_move(state, move):
     return state
 
 
-#  проверить на зацикливание
-def check_limit(node):
-    if node.lvl >= 100:
-        # print('timeout')
-        return True
-    return False
-
-
 def get_moves(state):
     moves = list()
 
@@ -170,8 +162,6 @@ def do(node):
     if node.move:
         state = calc_current_state(node)
         if not state:
-            return
-        if check_limit(node):
             return
         set_node(node, state)
 
