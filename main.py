@@ -18,14 +18,6 @@ def is_win(state):
     return True
 
 
-def state_equal(s1, s2):
-    res = True
-    for i in range(len(s1)):
-        if s1[i] != s2[i]:
-            res = False
-    return res
-
-
 def search_loop(solution, capacity):
     len_solution = len(solution)
 
