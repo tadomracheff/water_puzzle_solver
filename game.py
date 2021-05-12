@@ -1,6 +1,7 @@
 from classes.Flask import Flask
 from classes.Move import Move
 from classes.Tree import Tree
+from config import *
 import uuid
 
 
@@ -128,7 +129,7 @@ def show_solution(node):
         flasks = get_copy(node.state)
         if check_solution(solution, flasks):
             unique_filename = str(uuid.uuid4())
-            f = open('solution/{}_{}.txt'.format(len(solution), unique_filename), 'w')
+            f = open(solution_dir + '{}_{}.txt'.format(len(solution), unique_filename), 'w')
             for step in solution:
                 f.write(step.__str__() + '\n')
                 print(step)

@@ -2,6 +2,7 @@ import glob
 import os
 from threading import Thread
 from game import *
+from config import *
 
 
 if __name__ == '__main__':
@@ -13,7 +14,7 @@ if __name__ == '__main__':
     # flasks = game_init([[1, 2, 3, 4], [2, 1, 3, 4], [2, 1, 3, 4], [4, 2, 1, 3]], 2, 4)
     # flasks = game_init([[1, 1, 1, 2], [1, 3, 2, 4], [4, 2, 4, 3], [3, 4, 3, 5], [2, 5, 5, 5]], 2, 4)
 
-    files = glob.glob('solution/*')
+    files = glob.glob(solution_dir + '*')
     for f in files:
         os.remove(f)
 

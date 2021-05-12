@@ -1,0 +1,1 @@
+solution_dir = 'solution/'
